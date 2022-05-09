@@ -1,1 +1,93 @@
+As an Employer, I want to input my employee data so that I can get a preview of benefit costs
 
+Scenario 1: Add Employee
+GIVEN an Employer
+AND I am on the Benefits Dashboard page
+WHEN I select Add Employee
+THEN I should be able to enter employee details
+AND the employee should save
+AND I should see the employee in the table
+AND the benefit cost calculations are correct
+Actual result: Employee created successfully
+
+Bug report: Employee First Name under Last name column and Last Name under First Name column
+Given an Employer
+And I am on the Paylocity Benefits Dashboard page
+When I observe Employee List
+Then I should be able to see Employee First Name under First Name column 
+And  Employee Last Name under Last Name column 
+Actual result: Employee First Name under Last name column and Last Name under First Name column
+
+
+Bug report: Benefits Dashboard page "Dependants" is misspelled as "Dependents"
+Given an Employer
+And I am on the Paylocity Benefits Dashboard page
+When I observe Employee List
+Then I should be able to see "Dependants" column 
+Actual result: Benefits Dashboard page "Dependants" is misspelled as "Dependents"
+
+
+Bug report: Benefits Dashboard page "Action" is misspelled as "Actions"
+Given an Employer
+And I am on the Paylocity Benefits Dashboard page
+When I observe Employee List
+Then I should be able to see "Action" column 
+Actual result: Benefits Dashboard page "Action" is misspelled as "Actions"
+
+
+Scenario 2: Edit Employee
+GIVEN an Employer
+AND I am on the Benefits Dashboard page
+WHEN I select the Action Edit
+THEN I can edit employee details
+AND the data should change in the table
+Actual Result: Employee details changed successfully
+
+Bug Report: Edit Employee
+GIVEN an Employer
+AND I am on the Benefits Dashboard page
+WHEN I select the Action Edit
+THEN I should be able to see Edit Employee Module
+Actual result: Edit Employee module name is not correct
+
+Scenario 3: Delete Employee
+GIVEN an Employer
+AND I am on the Benefits Dashboard page
+WHEN I click the Action X
+THEN the employee should be deleted
+Actual result: Employee deleted successfully
+
+API:
+Bug report: Calls wiht no Auth should give 401 status code
+Given I am sending GET/POST/PUT/DELETE call on /api/employees whith no Auth
+When I send the Reguest with no Auth
+Then I should be able to get 401 status code
+Actual result: 500 Internal Server Error
+
+Bug report: I am able to create employee with PUT call
+Given I am sending PUT call with id that not exist in the employee list
+When I send the Request with not existing employee id
+Then I should get status code 404 not found
+Actual result: new employee is created and 200 status code
+
+Note: I am able to send Dependants as a string but type for Dependants is integer
+"dependants": {
+          "format": "int32",
+          "maximum": 32,
+          "minimum": 0,
+          "type": "integer"
+        },
+
+Bug report: Delete Employee
+Given I am sending DELETE call with id that not exist in the employee list
+When I send the Request with not existing employee id
+Then I should get status code 404 not found
+Actual result: I am getting 200 status code
+
+Bug report: Get Employee
+Given I am sending Get call with id that not exist in the employee list
+When I send the Request with not existing employee id
+Then I should get status code 404 not found
+Actual result: I am getting 200 status code and empty response body
+
+Note: Response  "username": "TestUser210", should be "userName"
